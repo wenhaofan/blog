@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>范先生-以实例驱动进步</title>
+    <meta name="keywords" content="个人博客,个人博客网站,it博客,个人网站,优秀的个人网站,范文皓" />
+<meta name="description" content="范文皓个人博客网站是一个JAVA开发为主的个人博客网站。" />
+<meta name="Author" content="范文皓">
+
+#@jquery()
+#@bootstrap()
+    <link rel="stylesheet" href="/assets/css/master.css"/>
+    <link rel="stylesheet" href="/assets/css/article_show.css"/>
+	
+	  <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon"> 
+
+</head>
+<body class="container-fluid">
+<!-- header -->
+#@header()
+<!--end header-->
+
+<!--page main-->
+
+<div class="row">
+    <!--pc端占位空白-->
+    <div class="blank col-xs-0 col-sm-2 col-md-3">
+    </div>
+    <!--文章展示部分-->
+    <main class="main col-xs-12 col-sm-9 col-md-6">
+        <h3>个人档案：</h3><br/>
+     <pre class="brush:java;toolbar:false">/**
+ * 实例化对象
+ * @author fwh
+ *
+ */
+public class Main {
+	public static void main(String[] args) {
+
+		Person blogger = new Person();
+
+		blogger.setName(&quot;范文皓&quot;);
+		blogger.setAge(18);
+		blogger.setAddress(&quot;四川&quot;);
+		blogger.setPhone(&quot;************&quot;);
+		blogger.setQQ(&quot;2195743583&quot;);
+		blogger.setSex(&#39;男&#39;);
+
+		System.out.println(blogger);
+	}
+}</pre>
+        <p>
+            <br/>
+        </p>
+<pre class="brush:java;toolbar:false">import java.io.Serializable;
+
+/**
+ * 个人信息的实体类
+ * @author fwh
+ *
+ */
+public class Person implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	private String name;
+
+	private int age;
+
+	private char sex;
+
+	private String address;
+
+	private String phone;
+
+	private String QQ;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public char getSex() {
+		return sex;
+	}
+
+	public void setSex(char sex) {
+		this.sex = sex;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getQQ() {
+		return QQ;
+	}
+
+	public void setQQ(String qQ) {
+		QQ = qQ;
+	}
+
+	@Override
+	public String toString() {
+		return &quot;Person [name=&quot; + name + &quot;, age=&quot; + age + &quot;, sex=&quot; + sex + &quot;,
+		 address=&quot; + address + &quot;, phone=&quot; + phone
+				+ &quot;, QQ=&quot; + QQ + &quot;]&quot;;
+	}
+
+
+}</pre>
+        <p>
+            <br/>
+        </p>
+    </main>
+
+    <div class="content-right col-xs-12 col-sm-3 col-md-3">
+    	
+    </div>
+</div>
+
+
+<!--end page main-->
+
+<!-- footer-->
+#@bottom()
+<!--end footer-->
+
+<div style="width: 200px;">
+
+</div>
+</body>
+
+</html>

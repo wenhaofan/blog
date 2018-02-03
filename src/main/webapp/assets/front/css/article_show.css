@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* design by Mr fan 2017.9.8 */
+/* ===================reset======================*/
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+h1, h2, h3, h4 {
+    margin: 0 !important;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {text-decoration: none !important;}
+
+ul li, ol li {
+    list-style: none;
+
+}
+body {
+    font-size: 14px;
+    background-color:#efefef !important;
+}
+article a{
+    color:#526163;
+}
+
+/* =============main=============*/
+main{
+    margin-top: 2rem;
+}
+article{
+    padding:2rem;
+    background-color:#fff ;
+}
+article h3{
+    text-align: center;
+}
+.article-info{
+    padding-left: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0px;
+    color: #999;
+    font-size: 1.4rem;
+    text-align: center;
+}
+@media screen and (min-width: 760px){
+.last{
+    float: left;
+}
+.next{
+    float: right;
+}
+.link_nav{
+    height: 2rem;
+}
+}
+@media screen and (max-width: 890px){
+    .link_nav{
+        height: 4rem;
+    }
+    .last{
+        overflow: hidden;
+    }
+    .next{
+        overflow: hidden;
+    }
+}
+
+#article-content{
+	margin-top:0.8rem;
+}

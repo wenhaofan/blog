@@ -1,0 +1,17 @@
+#define mes(mes,arr)
+	#set(val='alert alert-danger')
+	#if(mes!=null)
+	<div class=" 
+	
+		#for(item:arr) 
+			#if(mes == item)
+				#set(val='alert alert-success')
+				#break;
+			#end
+		#end
+	#(val)
+	" 
+	role="alert" style="text-align:center;">#(mes)</div>
+	#end
+	
+#end

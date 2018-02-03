@@ -1,0 +1,9 @@
+.label-font {
+	line-height: 30px;
+}
+
+html {
+	overflow-x: hidden;
+	min-height: 200px;
+	max-height: 200px;
+}

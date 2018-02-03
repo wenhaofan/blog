@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+   #@jquery()
+   #@bootstrap()
+    <link rel="stylesheet" type="text/css" href="/assets/back/diy/js/jquery-autoHeightTextarea.js">
+    <script src="/assets/back/diy/js/diy.js" ></script>
+    <link rel="stylesheet" type="text/css" href="/assets/back/diy/css/diy.css" >
+  
+</head>
+<input type="button" id="show"  value="显示"/>
+<aside >
+    <ul>
+        <li style="text-align: center;padding: 0;">文件目录<span style="display: inline;margin-left: 1rem;" onclick="hideMenu()" data-toggle="modal" data-target="#myModal" >隐藏</span></li>
+     
+        <li>
+        	#@menuTree(viewTree.getRootMenu(),viewTree,2)
+        </li>
+    </ul>
+    
+</aside>
+<main >
+<form action="" id="dataForm" >
+<input id="menuId" name="menuId" type="hidden">
+<input id="menuName" name="menuName" type="hidden">
+<textarea id="textarea" name="content" style="height:0px;">
+
+</textarea>
+</form>
+</main>
+
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* design by Mr fan 2017.9.30 */
+.hint{
+    position: absolute;
+    background-color: #e1e1e8;
+top:-999999px;
+    position: absolute;
+    width: 200px;
+    height: 70px;;
+    z-index:999;
+    background:rgba(217,200,200,1);
+    color: black;
+    text-align: center;
+    display:none;
+}
+
+.hint p{
+    line-height:30px;
+}

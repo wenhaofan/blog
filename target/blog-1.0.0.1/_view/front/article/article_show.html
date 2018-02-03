@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="#(seoKeywords)" />
+<meta name="description" content="#(seoDescr)" />
+<meta name="Author" content="范文皓">
+
+
+<script src="/assets/front/js/forbid.js"></script>
+<link rel="stylesheet" href="/assets/front/css/forbid.css" />
+<link rel="stylesheet" href="/assets/front/css/master.css" />
+<link rel="stylesheet" href="/assets/front/css/article_show.css" />
+<link rel="shortcut icon" href="/favicon.ico"  type="image/x-icon">
+
+
+#@jquery()
+#@bootstrap()
+<title>#(seoTitle)</title>
+
+</head>
+<body class="container-fluid">
+	<!-- header -->
+		#@header()
+	<!--end header-->
+	
+	<!--page main-->
+
+	<div class="row">
+		<!--pc端占位空白-->
+		<div class="blank col-xs-0 col-md-1"></div>
+		<!--文章展示部分-->
+		<main class="main col-xs-12 col-sm-9 col-md-8">
+		<article>
+			<h3 class="article-title">
+				<a href="" title="查看#(article.ukTitle)全文">#(article.ukTitle)</a>
+			</h3>
+			<p class="article-info">
+				分类:
+					#for(category:article.categorys)
+						<a href="/index?c=#(category.pkId)" title="查看#(category.ukName)开发中的文章">#(category.ukName)</a>
+						#if(for.last!=true)
+									 、 
+								#end 
+					#end
+					&nbsp;&nbsp;&nbsp;
+					 <span class="xs-time">
+					发表时间:#date(article.gmtCreate,"yyyy-MM-dd HH:mm:ss") &nbsp;&nbsp;&nbsp; </span> <span
+					class="glyphicon glyphicon-comment"></span>&nbsp;<span id="readNum">#(article.readNum)</span>&nbsp;&nbsp;浏览&nbsp;&nbsp;&nbsp;#(article.isOriginal==1?'原创':'转载')
+			</p>
+			<div>
+				#(article.content)
+			</div>
+			<nav class="link_nav">
+	
+				#set(lastArticle=lastNextArticle.get(0))
+				<p class="last">
+					上一篇：<a href="/article/#(lastArticle.pkId)">#(lastArticle.ukTitle)</a>
+				</p>
+				#set(nextArticle=lastNextArticle[1])
+				<p class="next">
+					上一篇：<a href="/article/#(nextArticle.pkId)">#(nextArticle.ukTitle)</a>
+				</p>
+			</nav>
+		</article>
+		<div class="" style="margin: 2rem 0;">
+			<!--PC和WAP自适应版-->
+			<div id="SOHUCS" sid="#(article.pkId)"></div>
+			<script type="text/javascript">
+				(function() {
+					var appid = 'cytcLUopr';
+					var conf = 'prod_8acf9ebcdc92f7f9572daef2e77a8114';
+					var width = window.innerWidth
+							|| document.documentElement.clientWidth;
+					if (width < 960) {
+						window.document
+								.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='
+										+ appid
+										+ '&conf='
+										+ conf
+										+ '"><\/script>');
+					} else {
+						var loadJs = function(d, a) {
+							var c = document.getElementsByTagName("head")[0]
+									|| document.head
+									|| document.documentElement;
+							var b = document.createElement("script");
+							b.setAttribute("type", "text/javascript");
+							b.setAttribute("charset", "UTF-8");
+							b.setAttribute("src", d);
+							if (typeof a === "function") {
+								if (window.attachEvent) {
+									b.onreadystatechange = function() {
+										var e = b.readyState;
+										if (e === "loaded" || e === "complete") {
+											b.onreadystatechange = null;
+											a()
+										}
+									}
+								} else {
+									b.onload = a
+								}
+							}
+							c.appendChild(b)
+						};
+						loadJs("https://changyan.sohu.com/upload/changyan.js",
+								function() {
+									window.changyan.api.config({
+										appid : appid,
+										conf : conf
+									})
+								});
+					}
+				})();
+			</script>
+
+
+		</div>
+		</main>
+
+		<div class="content-right col-xs-12 col-sm-3 col-md-3">
+
+			#@aside()
+		</div>
+	</div>
+
+
+	<!--end page main-->
+
+	<!-- footer-->
+	#@bottom()
+	<!--end footer-->
+</body>
+
+</html>

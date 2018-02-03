@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+#@jquery()
+#@bootstrap()
+#@validate()
+<script type="text/javascript">
+
+</script>
+<title>分类列表</title>
+
+</head>
+
+<body>
+	<div>
+		<ul class="breadcrumb" style="margin: 0px;">
+			<li>新增页面列表</li>
+		</ul>
+	</div>
+	<hr />
+	<div class="container-fluid"  style="width:48%;display:inline-block;" >
+		<div class="row alert alert-info" style="margin: 0px; padding: 5px;">
+				<span style="display:inline-block;padding: 6px 12px;">资源管理</span>
+				<button class="btn" type="button" id="assetsReload">清除资源缓存</button>
+					<button type="button" class="btn btn-success" data-toggle="modal" 
+				data-target="#addAssets" onclick="viewAdd()" >添加</button>
+			</div>
+				<table class="table table-hover table-condensed">
+					<tr>
+						
+						<th>资源全路径</th>
+						<th>操作</th>
+					</tr>
+				
+					#for(item:assetsMenuTree.menus)
+						#if(item.type==1)
+							#continue
+						#end
+						<tr>
+						
+							<td>#(assetsRelativePath+"/"+item.name)</td>
+							<td>				
+								<button type="button" class="btn btn-default btn-sm menuDelete" menuId="#(item.currentId)">删除</button>			
+								<!--  -->
+							</td>
+						</tr>
+					#end
+				</table>
+				
+			
+	</div>
+	<main class="container-fluid"  style="width:50%;display:inline-block;">
+		<form action="" class="form-inline ">
+			<div class="row alert alert-info" style="margin: 0px; padding: 5px;">
+				<span>新增页面管理</span>
+				<button class="btn" type="button" id="viewReload">清除页面缓存</button>
+				<button type="button" class="btn btn-success" data-toggle="modal" 
+				data-target="#myModal" onclick="viewAdd()" >添加</button>
+				
+			</div>
+			<div class="row" style="padding: 15px;padding-left:25px;">
+					#@mes(mes,['修改成功!','添加成功!','删除成功!'])
+				<table class="table table-hover table-condensed">
+					<tr>
+						<th>ID</th>
+						<th>页面路径</th>
+						<th>访问路径</th>
+						<th>创建时间</th>
+						<th>操作</th>
+					</tr>
+				
+					#for(item:htmlActions)
+						<tr>
+							<td>#(item.pkId)</td>
+							<td>#(item.path)</td>
+							<td>#(item.action)</td>
+							<td>#date(item.gmtCreate,"yyyy-MM-dd HH:mm:ss")</td>
+							<td>				
+								<button type="button" class="btn btn-default btn-sm " actionId="#(item.pkId)">删除</button>		
+								<button type="button" id="" class="btn btn-default btn-sm update"  data-toggle="modal" data-target="#myModal" actionId="#(item.pkId)" onclick="update()">修改</button>		
+								<!--  -->
+							</td>
+						</tr>
+					#end
+				</table>
+				
+				
+		
+		</div>
+	</form>	
+		</main>
+<!-- 添加资源 -->
+<div class="modal fade" id="addAssets" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:350px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加资源</h4>
+      </div>
+      <div class="modal-body">
+       	<form action="" id="assetsForm" enctype="multipart/form-data" method="post">
+				<input type="file" name="upfile">
+       	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onclick="saveAssets()">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 添加和修改页面 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:350px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加页面</h4>
+      </div>
+      <div class="modal-body">
+       	<form action="" id="form" enctype="multipart/form-data" method="post">
+       				<input type="hidden" name="type">
+       				<input type="hidden" name="pkId">
+					<input type="file" name="upfile">
+       		访问路径:<input type="text" name="action">
+       		
+       	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+<script type="text/javascript">
+	
+	
+	function saveAssets(){
+		var formData = new FormData();
+		var file=$("#assetsForm").find("input")[0].files[0];
+		formData.append("upfile",file);
+		$.ajax({
+			url:"/admin/diy/assets/add",
+			type:"post",
+			data:formData,
+	    	processData: false,
+	    	contentType: false,
+	    	success:function(data){
+	    		if(data.state=="ok"){
+	    			alert("上传成功!");
+	    			window.location.reload();
+	    		}else{
+	    			alert("系统繁忙，请时候再试!");
+	    		}
+	    	}
+		})
+	}
+	
+	//"/admin/diy/action/add"
+	function submitForm(){
+		var url=$("#form").attr("action");
+		var formData = new FormData();
+		var pkId=$("input[name='pkId']").val();
+		
+		var file=$("#form").find("input[type='file']")[0].files[0];
+		formData.append("ha.pkId",pkId);
+   		formData.append("upfile",file);
+   		formData.append("ha.action",$("input[name='action']").val());
+			
+			$.ajax({
+				url:url,
+				type:"post",
+				 data:formData,
+		    	  processData: false,
+		    	  contentType: false,
+		    	 success:function(data){
+		    		 if(data.state=="ok"){
+		    			 alert("上传成功!");
+		    			 location.reload();
+		    		 }else{
+		    			 alert("系统繁忙，请稍后再试！");
+		    		 }
+		    	 }
+			});
+	}
+	
+	
+	$(function(){
+		$("#assetsReload").click(function(){
+			window.location.href="/admin/diy/assets/reload";
+		});
+		$("#viewReload").click(function(){
+			window.location.href="/admin/diy/action/list/reload";
+		});
+		$(".menuDelete").click(function(){
+			var menuId=$(this).attr("menuId");
+			if(!confirm("是否确认删除？")){
+				return;
+			}
+			$.ajax({
+				url:"/admin/diy/assets/remove/"+menuId,
+				success:function(data){
+					if(data.state=="ok"){
+						alert("删除成功");
+						window.location.reload();
+					}else{
+						alert("删除失败");
+					}
+				}
+			});
+		});
+		
+		$(".update").click(function(){
+			var id=$(this).attr("actionId");
+			$.ajax({
+				url:"/admin/diy/action/update/"+id,
+				success:function(data){
+					$("input[name='pkId']").val(data.pkId);
+					$("input[name='action']").val(data.action);
+					$("input[name='upfile']").hide();
+					viewUpdate();
+				}
+			});
+		});	
+		
+	})
+	
+	function viewAdd(){
+		$("input[name='type']").val("1");
+		$("input[name='upfile']").show();
+		$("input[name='action']").val("");
+		$("input[name='id']").val("");
+		$("#form").attr("action","/admin/diy/action/add");
+		$("#myModalLabel").text("添加页面");
+	}
+	function viewUpdate(){
+		$("input[name='type']").val("1");
+		$("#form").attr("action","/admin/diy/action/doUpdate");
+		$("#myModalLabel").text("修改页面");
+	}
+	
+</script>
+
+</body>
+</html>

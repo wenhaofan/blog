@@ -1,0 +1,94 @@
+/*main right*/
+/*aside{*/
+    /*margin-top: 2.2rem;*/
+/*}*/
+ul{
+		text-align:center;
+	}
+.fixed-aside{
+    position: fixed !important;
+    width: 20%;
+margin-left: 2rem;
+}
+@media screen and (max-width: 768px){
+    .fixed-aside{
+
+    }
+}
+/*博主个人信息*/
+.cover{
+    display: none;
+}
+
+.blogger-info {
+  padding: 0.5rem 1rem;  background-color: #fff;
+}
+.blogger-info ul li{
+    list-style: none;
+}
+.aside{
+
+}
+.aside-title{
+    font-size: 1.5rem !important;
+    line-height: 2.5rem;
+    margin-bottom: 0.3rem;
+  padding-left: 1rem;
+}
+.content-right{
+overflow: auto;}
+
+.content-right-block {
+    margin: 2rem;
+    margin-left: 0rem;
+}
+.aside-bottom-blank{
+	display:hidden;
+}
+@media screen and (max-width: 768px){
+    .content-right-block {
+   
+		margin:0px;
+		 margin-top:1rem;
+    }
+	
+	.aside-bottom-blank{
+	
+		display:block;
+		height:2.5rem;
+	}
+}
+.content-right-block ul{
+    margin-bottom: 0;background-color: #fff;
+}
+/*站内搜索*/
+.show-title{
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+.search-block {
+
+}
+
+/*热门文章*/
+.hot-article-title{
+
+    padding: 0.5rem;
+    background-color: #fff;
+}
+
+/*标签*/
+.label-block {
+    background-color: #66afe9;
+}
+
+/*友情链接*/
+.link-content {
+    padding: 0.5rem;
+    background-color:#fff;
+}
+
+
+
+/*end main right*/
+

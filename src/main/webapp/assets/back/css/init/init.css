@@ -1,0 +1,63 @@
+body {
+	
+}
+
+h2, h3 {
+	display: inline-block;
+}
+
+.main-box {
+	position: absolute;
+	width: 500px;
+	height: 200px;
+	left: 50%;
+	top: 20%;
+	margin-left: -220px;
+}
+
+.title-box {
+	position: absolute;
+	width: 400px;
+	height: 200px;
+	left: 50%;
+	top: 15%;
+	margin-left: -200px;
+	margin-top: -50px;
+}
+
+.login-layout .widget-box .widget-main {
+	padding: 1px 18px 18px;
+	background: #f7f7f7;
+}
+
+.steps {
+	height: 4rem;
+	width: 400px; color : white;
+	padding: 0 1rem;
+	color: white;
+}
+
+.step {
+	display: inline-block;
+	height: 4rem;
+	width: 118px;
+	line-height: 4rem;
+	background-color: #ddd;
+	margin: 0px;
+	padding-left: 1.5rem;
+}
+
+.stepNum {
+	font-size: 2.5rem;
+}
+
+.current {
+	background-color: #478fca !important;
+}
+.choose-step{
+	width:220px;
+	margin:0 auto;
+}
+.choose-step>a{
+	display:inline-block;
+}

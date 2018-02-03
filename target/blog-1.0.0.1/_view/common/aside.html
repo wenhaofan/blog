@@ -1,0 +1,81 @@
+#define aside()
+<!--博客展示栏最新文章部分-->
+<aside class="fixed-aside " id="fixed-aside">
+
+	<!--个人信息-->
+	#if(blogger)
+	<div class="blogger-info-block content-right-block">
+		<div class="aside-title">
+			<a href="/profiles"><strong>博主信息</strong></a>
+		</div>
+		<div class="link-content">
+			<ul>
+				<li>姓名：#(blogger.name??)</li>
+				<li>职业：#(blogger.job??)</li>
+				<li>QQ：#(blogger.qq??)</li>
+				<li>定位：#(blogger.address??)</li>
+				<!-- 四川 &middot; 成都 -->
+			</ul>
+			<h4></h4>
+		</div>
+	</div>
+	#end
+	<!--<div class="content-right-block">-->
+
+	<!--&lt;!&ndash;<iframe id="iframe" frameborder="no" border="0" marginwidth="0" marginheight="0" width=267 height=110 src="//music.163.com/outchain/player?type=0&id=927821989&auto=1&height=90"></iframe>            </div>&ndash;&gt;-->
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=52 src="//music.163.com/outchain/player?type=0&id=927821989&auto=1&height=32"></iframe><script>-->
+	<!--$(function(){-->
+
+	<!--$("#iframe img").hide();-->
+
+	<!--});-->
+
+	<!--</script>-->
+	<!--&lt;!&ndash;站内搜索&ndash;&gt;-->
+	<!--<div class="search-block content-right-block">-->
+	<!--<div class="show-title"><a href="/article"><strong>站内搜索</strong></a></div>-->
+	<!--<div>-->
+	<!--<form class="navbar-form " style="padding: 0">-->
+	<!--<div class="form-group">-->
+	<!--<input type="text" class="form-control" placeholder="Search" style="width: 15rem;">-->
+	<!--</div>-->
+	<!--<button type="submit" class="btn btn-default">搜索</button>-->
+	<!--</form>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--热门文章-->
+	#if(!hotArticles.isEmpty())
+	<div class="hot-article-block content-right-block">
+		<div class="aside-title">
+			<a href="javascript:void(0)"><strong>热门文章</strong></a>
+		</div>
+		<div class="hot-article-title">
+			<ul>
+				#for(article:hotArticles??)
+					<li><a href="/article/#(article.pkId)">#(article.ukTitle)</a></a></li>
+				#end
+			</ul>
+		</div>
+	</div>
+	#end
+	<!--友情链接-->
+	#if(!blogrolls.isEmpty())
+	<div class="link-block content-right-block">
+		<div class="aside-title">
+			<a href="javascript:void(0)"><strong>友情链接</strong></a>
+		</div>
+		<div class="link-content">
+			<ul>
+				#for(blogroll:blogrolls??)
+					<li><a href="#(blogroll.ukUrl)" title="#(blogroll.remark)" target="_blank">#(blogroll.ukName)</a></li>	
+				#end
+			</ul>
+		</div>
+	</div>
+	#end
+	<div class="aside-bottom-blank"></div>
+</aside>
+<link rel="stylesheet" href="/assets/front/css/aside.css" />
+<script src="/assets/front/js/aside.js"></script>
+#end

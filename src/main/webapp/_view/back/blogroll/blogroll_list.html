@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+#@jquery()
+#@bootstrap()
+#@validate()
+<title>系统管理-友链列表</title>
+<script type="text/javascript">
+	function blogrollUpdate(pkId){
+		
+		$("#updateAndAdd").attr("action","/admin/blogroll/doUpdate");
+		$("#myModalLabel").html("修改友链");
+		$("#formSubmit").val("确认修改");
+		$.ajax({
+				url:"/admin/blogroll/update/"+pkId,
+				type:"get",
+				success:function(result){
+					if(result.state=='fail'){
+						alert("系统繁忙,请稍后再试!");
+					}else{
+						setUpdateForm(result.blogroll);
+					}
+				},
+				dataType: "json"
+		});
+	}
+	
+	function setUpdateForm(blogroll){
+		$("#ukPriority").val(blogroll.ukPriority);
+		$("#ukName").val(blogroll.ukName);
+		$("#ukUrl").val(blogroll.ukUrl);
+		$("#remark").val(blogroll.remark);
+		$("#pkId").val(blogroll.pkId);
+	}
+	
+	
+	function addBlogroll(){
+		$("#formSubmit").val("添加");
+		$("#myModalLabel").html("添加友链");
+		
+		$("#updateAndAdd").attr("action","/admin/blogroll/add");
+	}
+</script>
+</head>
+<style>
+
+</style>
+<body>
+	<div>
+		<ul class="breadcrumb" style="margin: 0px;">
+			<li>系统管理</li>
+			<li>友链列表</li>
+		</ul>
+	</div>
+	<hr />
+	<form action="" class="form-inline">
+		<div style="">
+			<button type="button" class="btn btn-success" class="btn btn-default btn-sm"  data-toggle="modal" 
+			data-target="#myModal" onclick="addBlogroll()" style="display:block;margin:0 auto;">添加</button>
+			
+		</div>
+		<div class="row" style="padding: 15px;padding-left:25px;">
+				
+				#@mes(mes,['删除成功!','添加成功!','修改成功!'])
+			<table class="table table-hover table-condensed">
+				<tr>
+					<th>友链ID</th>
+					<th>友链名称</th>
+					<th>友链路径</th>
+					<th>说明</th>
+					<th>优先级</th>
+					<th>操作</th>
+				</tr>
+			
+				#for(item:blogrollList)
+					<tr>
+						<td>#(item.pkId)</td>
+						<td>#(item.ukName)</td>
+						<td>#(item.ukUrl)</td>
+						<td><textarea class="form-control" rows="2" cols="10"  readonly="readonly">#(item.remark)</textarea></td>
+						<td>#(item.ukPriority)</td>
+						<td>				
+							<button type="button" class="btn btn-default btn-sm" onclick="blogrollDelete(#(item.pkId))" >删除</button>		
+							<button type="button" id="" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"  onclick="blogrollUpdate(#(item.pkId))" >修改</button>		
+						<!--   -->
+						</td>
+					</tr>
+				#end
+			</table>
+		</div>
+	</form>	
+		
+	
+	
+<!-- update  -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body" style="">
+      	<form action="" id="updateAndAdd" class="form-horizontal" method="post">
+			<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<div class="col-xs-2"></div>
+					<label class="col-xs-2 control-label label-font" >友链名称</label>
+					<div class="col-xs-5 ">
+						<input type="text" name="ukName" id="ukName" class="form-control" placeholder="请输入友链名称" value=""/>
+						<input type="hidden" name="pkId" id="pkId">
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group ">
+				<div class="col-xs-2"></div>
+					<label class="col-xs-2 control-label label-font">友链路径</label>
+					<div class="col-xs-5 ">
+						<input type="text" name="ukUrl" id="ukUrl" class="form-control" placeholder="请输入友链路径" value=""/>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group ">
+				<div class="col-xs-2"></div>
+					<label class="col-xs-2 control-label label-font">友链说明</label>
+					<div class="col-xs-5 ">
+						<textarea  name="remark" id="remark" class="form-control" rows="2" cols="10" placeholder="请输入友链说明"  ></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group ">
+				<div class="col-xs-2"></div>
+					<label class="col-xs-2 control-label label-font">优先级</label>
+					<div class="col-xs-5 ">
+						<input type="text"  name="ukPriority" id="ukPriority" class="form-control" placeholder="请输入优先级" value=""/>
+
+					</div>
+					<div class="col-xs-2 ">
+						<p style="padding:0px;line-height:3rem;">max:<span id="maxPriority">#(maxPriority)</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		
+		
+		<div class="row">
+			<div class="col-xs-12 col-xs-offset-4">
+				<input type="submit" id="formSubmit" class="btn btn-success" value="" />
+				<!-- <input type="reset" class="btn btn-danger" value="重置信息" /> -->
+			</div>
+
+		</div>
+
+	</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+	function blogrollDelete(id){
+		if(confirm('确认要删除吗?')){
+			window.location.href="/admin/blogroll/remove/"+id;
+			
+		}
+	}
+	
+	
+	function blogrollInsert(){
+		$("#myModalLabel").html("添加友链");
+		$("#upIn").attr("src","/admin/blogroll/add");
+	
+	}
+</script>
+</body>
+</html>

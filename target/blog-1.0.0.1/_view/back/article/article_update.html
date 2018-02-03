@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+#@jquery()
+#@bootstrap()
+<link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/assets/bootstrapPlugin/css/build.css">
+<link href="/assets/back/css/article/article_add.css" rel="stylesheet" />
+<script type="text/javascript">
+//图片上传
+$(function(){
+	$("#upload").click(function(){
+		inputchange();
+	});
+	
+	
+	 
+	 // 图片选择改变事件
+    function inputchange(){
+    	var formData = new FormData();
+   
+    	 formData.append("upfile", $("#image")[0].files[0]);
+    	 $.ajax({
+    	  url: '/admin/common/upload/fileUpload',
+    	  type: 'post',
+    	  data: formData,
+    	  processData: false,
+    	  contentType: false,
+    	  success: function (data) {
+    		  $("#previewImage").attr('src',data.imageUrl); 
+    		  $("#imageUrl").val(data.imageUrl); 
+    		  $("#previewImage").css('display','inline-block');
+    	  }
+    	 });
+    }
+})
+
+
+
+</script>
+
+<title>文章修改</title>
+</head>
+<body style="background-color:#efefef !important;">
+<ol class="breadcrumb">
+  <li>文章修改</li>
+
+	
+	
+</ol>
+<div class="container-fluid">
+		<div class="col-xs-0 col-md-1"></div>
+		<div class="col-xs-12 col-md-10">
+			<main class="col-md-12"> 
+			<article>
+				<form id="form" action="/admin/article/doUpdate/" method="post" >
+				
+					<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1">标题:</span>
+						  <input name="article.pkId" type="hidden" value="#(article.pkId)">
+						  <input name="article.ukTitle" class="form-control" value="#(article.ukTitle??)" placeholder="文章标题" aria-describedby="basic-addon1" style="width:25rem;" required/>
+					</div>
+					 <br /> 
+					 <br /> 
+					
+					 封面图片:<img
+						src=""
+						style="display:none;" id="previewImage" width="125px" height="115px"/> <input type="hidden"
+						id="imageUrl" name="article.imageUrl"
+						style="display: inline-block;" /> 
+						<input type="file" name="upfile" id="image" value="选择图片" style="display: inline-block;"  />
+						<input type="button" id="upload" value="上传" />
+					<br /> <br />
+					<div>
+						<!-- 加载编辑器的容器 -->
+						<script id="container" name="article.content" type="text/plain">#(article.content??)</script>
+                    	<span id="contentMes" style="color:red;display:none;">不能为空!</span>
+					</div>
+					<br>
+					分类: <fieldset> 
+					#for(item:categorys) 
+					<div class="checkbox checkbox-inline">
+					<input type="checkbox" style="styled" name="categoryId"
+						value="#(item.pkId)" id="category#(item.pkId)"
+						#for(category:article.getCategorys())
+							#if(item.pkId==category.pkId)
+								checked
+							#end
+						#end
+						 />
+						<label for="category#(item.pkId)">#(item.ukName)</label>
+					</div>
+					 #end
+					<a href="#(ctx)/admin/category/list" target="_blank">添加分类</a>
+					<span id="categoryMes" style="color:red;display:none;">必须选中一个分类!</span>
+					</fieldset>
+					 <br> 
+					 <fieldset>
+					 <div class="radio radio-info radio-inline">
+						<input class="" style="styled" id="original" name="article.isOriginal"  #(article.isOriginal==1?'checked':'') type="radio" value="1" />
+							<label for="original">原创 </label>
+							</div>
+						 <div class="radio radio-info radio-inline">
+							<input class="" style="styled"  id="originalNo" name="article.isOriginal" type="radio" value="0"
+							#(article.isOriginal??== 0?'checked':'') />
+							<label for="originalNo">转载 </label>
+							</div>
+					</fieldset>
+					置顶:
+					<label>
+						<input name="article.isTop" type="radio" value="1"  #(article.isTop??== 0?'checked':'')/>是 </label> 
+					<label>
+					<input name="article.isTop" type="radio" value="0" #(article==null?'checked':'') #(article.isTop??== 1?'checked':'')/>否 </label>
+					<hr />
+					<input  type="submit" onclick="return save()" class="btn btn-primary" value="修改">
+				</form>
+			</article>
+			</main>
+		
+		</div>
+		<div class="col-xs-0 col-md-1"></div>
+	</div>
+	
+<!-- 配置文件 -->
+<script type="text/javascript"
+	src="/assets/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript"
+	src="/assets/ueditor/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+     var ue = UE.getEditor('container');
+     
+     function save(){
+     	var content=ue.getContent();
+     	
+     	if(content!=null&&content.length>0){
+     		return true;
+     	}
+     	
+     	if(checkCategory()){
+     		return true;
+     	}else{
+     		$("#categoryMes").show();
+     	}
+     	$("#contentMes").show();
+
+     	return false;
+     }
+     
+  	function checkCategory(){
+  		var isChecked=false;
+  		$("input[name^='category']").each(function(){
+  			isChecked=$(this).is(':checked');
+  			if(isChecked){
+  				return false;
+  			}
+  	 	 });
+  		
+  		return isChecked;
+  	}
+     
+    //为ue绑定焦点失去时间
+	ue.addListener('blur',function(editor){
+
+	var content=ue.getContent();
+	if(content.length>0){
+		$("#contentMes").hide();
+		}
+	})
+  	
+	$("input[name^='category']").click(function(){
+		$("#categoryMes").hide();
+	});
+
+</script>
+</body>
+</html>

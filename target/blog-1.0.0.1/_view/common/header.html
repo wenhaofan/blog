@@ -1,0 +1,28 @@
+#define header()
+<!-- header -->
+<header class="navbar-fixed-top row" id="top">
+	<!--nav container-->
+	<div class=" col-md-1"></div>
+	<nav class="col-xs-12 col-md-10">
+
+		<ul class="header-nav">
+		<li><a href="/">首页</a></li>
+		<li>
+			#for(category:categorys??)
+				<a href="/index?c=#(category.pkId)" title="#(category.ukName)">#(category.ukName)</a>
+			#end
+		</li>
+		<li>
+			<a href="/profiles" >关于我</a>
+		</li>
+		</ul>
+		
+	</nav>
+	<div class="col-xs-0 col-md-1"></div>
+	<!--end nav container-->
+</header>
+<div id="top-padding"></div>
+<link rel="stylesheet" href="/assets/front/css/header.css" />
+<script src="/assets/front/js/header.js"></script>
+<!-- header end -->
+#end

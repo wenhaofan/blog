@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/assets/back/css/category/category.css"/>
+#@jquery()
+#@bootstrap()
+#@validate()
+<script type="text/javascript">
+	function categoryUpdate(pkId){
+		var url="/admin/category/update/"+pkId;
+		
+		$.ajax({
+			  type:'POST',
+			  url:url,
+			  success:function(result){
+					if(result.state=="fail"){
+						alert("系统繁忙!");
+					}else{
+						setUpdateData(result.category);
+					}
+				},
+			  dataType: "json"
+			});
+		
+	}
+	
+	function setUpdateData(category){
+		$("#pkId").val(category.pkId);
+		$("#ukName").val(category.ukName);
+		$("#ukPriority").val(category.ukPriority);
+		$("#ukUrl").val(category.ukUrl);
+		$("#myModalLabel").text("分类修改");
+		$("#updateAndAdd").attr("action","/admin/category/doUpdate");
+	}
+	
+	function setAdd(){
+		$("#myModalLabel").text("添加分类");
+		$("#updateAndAdd").attr("action","/admin/category/doAdd");
+		var maxPriority=parseInt($("#maxPriority").text())+1;
+		$("#pkId").val("");
+		$("#ukName").val("");
+		$("#ukPriority").val(maxPriority);
+		$("#ukUrl").val("");
+	}
+	
+	$('#myModal').on('shown.bs.modal', function (e) {  
+        // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零  
+        $(this).css('display', 'block');  
+        var modalHeight=$(window).height() / 2 - $('#myModal .modal-dialog').height() / 2;  
+        $(this).find('.modal-dialog').css({  
+            'margin-top': modalHeight  
+        });  
+    });  
+	
+	function categoryDelete(pkId){
+		if(confirm("确认删除？")){
+			window.location.href="/admin/category/remove/"+pkId;
+		}
+		
+	}
+</script>
+<title>分类列表</title>
+
+</head>
+
+<body>
+	<div>
+		<ul class="breadcrumb" style="margin: 0px;">
+			<li>分类列表</li>
+		</ul>
+	</div>
+	<hr />
+	<main class="container-fluid">
+	<form action="" class="form-inline">
+		<div class="row alert alert-info" style="margin: 0px; padding: 5px;">
+			
+			<input type="button" class="btn btn-danger" value="查询"> 
+			<button type="button" class="btn btn-success" data-toggle="modal" 
+			data-target="#myModal" onclick="setAdd()" >添加</button>
+			
+		</div>
+		<div class="row" style="padding: 15px;padding-left:25px;">
+				#@mes(mes,['修改成功!','添加成功!','删除成功!'])
+			<table class="table table-hover table-condensed">
+				<tr>
+					<th>分类ID</th>
+					<th>分类名称</th>
+					<th>分类路径</th>
+					<th>分类优先级</th>
+					<th>操作</th>
+				</tr>
+			
+				#for(item:categoryList)
+					<tr>
+						<td>#(item.pkId)</td>
+						<td>#(item.ukName)</td>
+						<td>#(item.ukUrl)</td>
+						<td>#(item.ukPriority)</td>
+						<td>				
+							<button type="button" class="btn btn-default btn-sm" onclick="categoryDelete(#(item.pkId))">删除</button>		
+							<button type="button" id="" class="btn btn-default btn-sm"  data-toggle="modal" data-target="#myModal" onclick="categoryUpdate(#(item.pkId))">修改</button>		
+							<!--  -->
+						</td>
+					</tr>
+				#end
+			</table>
+			
+			
+	
+		</div>
+	</form>	
+		</main>
+	
+	
+<!-- update  -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body" style="">
+      		<form action="" class="form-horizontal" id="updateAndAdd">
+	
+			<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<div class="col-xs-2"></div>
+					<label class="col-xs-2 control-label label-font" >分类名称</label>
+					<div class="col-xs-5 ">
+						<input type="text" name="ukName" id="ukName" class="form-control" placeholder="请输入分类名称" value=""/>
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group ">
+				<div class="col-xs-2"></div>
+					<label class="col-xs-2 control-label label-font">分类路径</label>
+					<div class="col-xs-5 ">
+						<input type="text" name="ukUrl" id="ukUrl" class="form-control" placeholder="请输入分类路径" value=""/>
+						<input type="hidden"  name="pkId" id="pkId" class="form-control"  value=""/>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="form-group ">
+				<div class="col-xs-2"></div>
+					<label class="col-xs-2 control-label label-font">优先级</label>
+					<div class="col-xs-5 ">
+						<input type="text"  name="ukPriority" id="ukPriority" class="form-control" placeholder="请输入优先级" value=""/>
+						
+					</div>
+					<div class="col-xs-2 ">
+						
+						<p style="padding:0px;line-height:3rem;">max:<span id="maxPriority">#(maxPriority)</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-xs-12 col-xs-offset-4">
+				<input type="submit" class="btn btn-success" value="确认修改" /> <input
+					type="reset" class="btn btn-danger" value="重置信息" />
+			</div>
+
+		</div>
+
+	</form>
+      		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

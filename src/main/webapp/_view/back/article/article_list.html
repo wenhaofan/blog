@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+#@jquery()
+#@bootstrap()
+<link href="/assets/back/css/article/article_list.css" rel="stylesheet"/>
+<title>文章管理-文章查询</title>
+
+
+</head>
+<style>
+
+</style>
+<body >
+	<div>
+		<ul class="breadcrumb">
+			<li>文章管理</li>
+			<li>文章列表</li>
+		</ul>
+	</div>
+	<hr />
+	<main class="container-fluid">
+		#@mes(mes,['添加成功!','修改成功!','删除成功!','恢复成功!'])
+		<form action="/admin/article/list" class="form-inline" method="post" id="searchForm">
+			<div class="row alert alert-info" style="margin: 0px; padding: 5px;">
+				<div class="form-group">
+					<label>分类:</label>
+					<select name="categoryId" class="form-control">
+						<option value="">------</option>
+						#for(item:categorys)
+						
+							<option value="#(item.pkId)" #(item.pkId.toString()==categoryId?'selected':'')>#(item.ukName)</option>
+						#end
+					</select>
+					<label>状态:</label>
+					<select name="query.isValid" class="form-control">
+						<option value="#(com.wenhaofan.common._config.BlogConstant::VALID_YES)" >有效</option>
+						<option value="#(com.wenhaofan.common._config.BlogConstant::VALID_NO)" #(query.isValid==com.wenhaofan.common._config.BlogConstant::VALID_NO?'selected':'')>无效</option>
+					</select>
+				</div>
+				<input type="submit" class="btn btn-danger" value="查询" > 
+			
+
+				<a href="/admin/article/add" class="btn btn-success">添加文章</a>
+			</div>
+			<div class="row" style="padding: 15px;">
+				#@mes(deleteMes,"删除成功!")
+				<table class="table table-hover table-condensed">
+					<tr>
+						<th>文章ID</th>
+						<th>文章标题</th>
+						<th>分类</th>
+						<th>发表时间</th>
+						<td>操作</td>
+					</tr>
+				
+					#for(item:articlePage.getList())
+						<tr>
+							<td>#(item.pkId)</td>
+							<td>#(item.ukTitle)</td>
+							<td>
+								#for(category:item.categorys)
+									#(category.ukName)
+									
+									#if(for.last!=true)
+										、
+									#end
+								#end
+							</td>
+								<td>#date(item.gmtCreate,"yyyy-MM-dd HH:mm:ss")</td>
+							<td>
+							#if(item.isValid==com.wenhaofan.common._config.BlogConstant::VALID_YES)
+								<a href="javascript:if(confirm('确认删除?')) window.location.href='/admin/article/delete?d=#(item.pkId)'">删除</a>
+							#else
+								<a href="javascript:if(confirm('确认恢复?')) window.location.href='/admin/article/recover?d=#(item.pkId)'">恢复</a>
+							#end
+							
+							<a href="/admin/article/update/#(item.pkId)">修改</a>
+							<a href="/article/#(item.pkId)" target="_blank">查看</a>
+							</td>
+						</tr>
+					#end
+				</table>
+			</div>
+			#if(articlePage.totalPage==0)
+				<div class="alert alert-info" role="alert">暂无文章</div>
+			#end
+			#@paginate(articlePage)
+		</form>
+	</main>
+</body>
+</html>

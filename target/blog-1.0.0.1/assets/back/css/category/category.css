@@ -1,0 +1,71 @@
+body, html {
+	margin: 0px;
+	padding: 0px;
+}
+
+h1, h2, h3, h4, h5, p {
+	margin: 0px;
+	padding: 0px;
+}
+
+div {
+	margin: 0px;
+	padding: 0px;
+}
+
+.nav {
+	margin: 1rem;
+	background-color: #e6e6e6;
+	width: 10rem;
+	padding-left: 1rem;
+}
+
+.query {
+	margin-top: 2rem;
+	margin-left: 2rem;
+}
+
+.form {
+	width: 100%;
+	height: 100%;
+}
+
+.main {
+	width: 100%;
+	height: 100%;
+}
+
+.query {
+	width: 100%;
+	background-color: #C1EEF4;
+}
+
+.left {
+	display: inline;
+	margin-left: 2rem;
+	display: inline;
+}
+
+.inline {
+	display: inline;
+}
+
+.showContent {
+	margin-top: 1rem;
+	margin-left: 2rem;
+}
+
+.page {
+	margin: 0px auto;
+	width: 20rem;
+	margin-top: 2rem;
+}
+
+body {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+.modal.fade.in {
+	top: 20%;
+}

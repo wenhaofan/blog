@@ -1,0 +1,28 @@
+/*=====================header=====================*/
+header {
+    font-size: 1.8rem;
+    color: #fff;
+    background-color: #333;
+
+}
+nav>a{
+    color: #fff;
+}
+header ul{
+    margin: 0;
+    line-height: 4rem;
+}
+.header-nav > li {
+    margin-left:1.5rem;
+    display: inline-block;
+}
+
+.header-nav {
+    margin-left: 1.0rem;
+    display: inline-block;
+}
+
+.login-regeister{
+	display: block; margin-top: 1rem; float: right; color: black;
+}
+/*====================end header=====================*/

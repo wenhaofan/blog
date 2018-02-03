@@ -1,0 +1,19 @@
+/*====================footer============================*/
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+footer {
+    height: 2.5rem;
+    background-color: #333;
+    color: #fff;
+}
+
+footer p{
+    line-height:2.5rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+/*end===================footer=====================*/

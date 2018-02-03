@@ -1,0 +1,32 @@
+#define header()
+<!-- header -->
+<header class="navbar-fixed-top row" id="top">
+	<!--nav container-->
+	<div class=" col-md-1"></div>
+	<nav class="col-xs-12 col-md-10">
+
+		<ul class="header-nav">
+		<li><a href="/">首页</a></li>
+			<#if categorys?? && categorys?size gt 0> 
+				<#list categorys as category>
+					<li>
+					 <a href="/article/category/${category.get('uk_url')}"
+						title="查看所有${category.get('uk_name')}开发中的文章">${category.get('uk_name')}</a>
+					</li>
+					
+				</#list>
+				<li>
+						<a href="/profiles" >关于我</a>
+					</li>
+			 </#if>
+		</ul>
+		<a href="/admin" class="login-regeister">登录</a>
+	</nav>
+	<div class="col-xs-0 col-md-1"></div>
+	<!--end nav container-->
+</header>
+<div id="top-padding"></div>
+<link rel="stylesheet" href="/resource/front/css/header.css" />
+<script src="/resource/front/js/header.js"></script>
+<!-- header end -->
+#end

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+#@jquery()
+#@bootstrap()
+#@validate()
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>添加</title>
+
+</head>
+<style>
+body {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+form>.row{
+	margin-top:1.5rem;
+}
+</style>
+<body>
+	<div>
+		<ul class="breadcrumb" style="margin: 0px;">
+			<li>系统管理</li>
+			<li>首页信息配置</li>
+		</ul>
+	</div>
+	<hr/>
+	<main class="container-fluid">
+	<form action="/admin/bloger/update" method="post"
+		class="form-horizontal">
+		<div class="row alert alert-info" style="margin: 0px; padding: 5px;">博主信息</div>
+		#@mes(mes,["保存成功!"])
+		<!-- 开始1 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">博主姓名:</label>
+					<div class="col-xs-5 ">
+						<input type="text" class="form-control" name="name"
+							placeholder="请输入博主姓名" value="#(blogger.name??)" />
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="pk_id" value="#(blogger.pkId??)" />
+		</div>
+		
+		<!--结束1 -->
+		<!-- 开始2 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">职业:</label>
+					<div class="col-xs-5 ">
+						<input type="text" class="form-control" name="job"
+							placeholder="请输入关键词" value="#(blogger.job??)" />
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">QQ:</label>
+					<div class="col-xs-5 ">
+						<input type="text" class="form-control" name="qq"
+							placeholder="请输入博主qq" value="#(blogger.qq??)" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">博主定位:</label>
+					<div class="col-xs-5 ">
+						<input type="text" class="form-control" name="address"
+							placeholder="请输入博主定位" value="#(blogger.address??)" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束2 -->
+
+
+
+
+
+
+
+
+		<div class="row">
+			<div class="col-xs-3 col-xs-offset-4">
+				<input type="submit" class="btn btn-success" value="保存信息" /> <input
+					type="reset" class="btn btn-danger" value="重置信息" />
+			</div>
+
+		</div>
+
+	</form>
+	</main>
+</body>
+</html>

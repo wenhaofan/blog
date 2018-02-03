@@ -1,0 +1,81 @@
+#define aside()
+<!--博客展示栏最新文章部分-->
+<aside class="fixed-aside " id="fixed-aside">
+
+	<!--个人信息-->
+
+	<div class="blogger-info-block content-right-block">
+		<div class="aside-title">
+			<a href="/profiles"><strong>博主信息</strong></a>
+		</div>
+		<div class="link-content">
+			<ul>
+				<li>姓名：${blogerInfo.get('name')!''}</li>
+				<li>职业：${blogerInfo.get('job')!''}</li>
+				<li>QQ：${blogerInfo.get('qq')!''}</li>
+				<li>定位：${blogerInfo.get('address')!''}</li>
+				<!-- 四川 &middot; 成都 -->
+			</ul>
+			<h4></h4>
+		</div>
+	</div>
+	<!--<div class="content-right-block">-->
+
+	<!--&lt;!&ndash;<iframe id="iframe" frameborder="no" border="0" marginwidth="0" marginheight="0" width=267 height=110 src="//music.163.com/outchain/player?type=0&id=927821989&auto=1&height=90"></iframe>            </div>&ndash;&gt;-->
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=250 height=52 src="//music.163.com/outchain/player?type=0&id=927821989&auto=1&height=32"></iframe><script>-->
+	<!--$(function(){-->
+
+	<!--$("#iframe img").hide();-->
+
+	<!--});-->
+
+	<!--</script>-->
+	<!--&lt;!&ndash;站内搜索&ndash;&gt;-->
+	<!--<div class="search-block content-right-block">-->
+	<!--<div class="show-title"><a href="/article"><strong>站内搜索</strong></a></div>-->
+	<!--<div>-->
+	<!--<form class="navbar-form " style="padding: 0">-->
+	<!--<div class="form-group">-->
+	<!--<input type="text" class="form-control" placeholder="Search" style="width: 15rem;">-->
+	<!--</div>-->
+	<!--<button type="submit" class="btn btn-default">搜索</button>-->
+	<!--</form>-->
+	<!--</div>-->
+	<!--</div>-->
+	<!--热门文章-->
+	<div class="hot-article-block content-right-block">
+		<div class="aside-title">
+			<a href="javascript:void(0)"><strong>热门文章</strong></a>
+		</div>
+		<div class="hot-article-title">
+			<ul>
+			<#if hotArticles?? && hotArticles?size gt 0> 
+				<#list hotArticles as hotArticle> 
+					<li><a href="/article/${hotArticle.get('pk_id')}">${hotArticle.get('uk_title')}</a></a></li>
+				</#list>
+			 </#if>
+			</ul>
+		</div>
+	</div>
+
+	<!--友情链接-->
+	<div class="link-block content-right-block">
+		<div class="aside-title">
+			<a href="javascript:void(0)"><strong>友情链接</strong></a>
+		</div>
+		<div class="link-content">
+			<ul>
+				<#if blogrolls?? && blogrolls?size gt 0> 
+					<#list blogrolls as blogroll> 
+						<li><a href="${blogroll.get('uk_url')}" target="_blank">${blogroll.get('uk_name')}</a></li>
+					</#list>
+				 </#if>
+			</ul>
+		</div>
+	</div>
+	<div class="aside-bottom-blank"></div>
+</aside>
+<link rel="stylesheet" href="/resource/front/css/aside.css" />
+<script src="/resource/front/js/aside.js"></script>
+#end

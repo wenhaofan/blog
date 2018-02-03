@@ -1,0 +1,209 @@
+@charset "utf-8";
+/* design by Mr fan 2017.9.8 */
+/* ===================reset======================*/
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+h1, h2, h3, h4 {
+    margin: 0 !important;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ a:hover {text-decoration: none !important;}
+
+ul li, ol li {
+    list-style: none;
+
+}
+
+body {
+    font-size: 14px;
+    background-color:#efefef !important;
+}
+article a{
+    color:#526163;
+}
+
+
+
+/*====================main========================*/
+main {
+    margin-top: 2rem;
+    padding-left: 1rem;
+}
+@media screen and (max-width: 970px){
+    .main{
+        padding-left: 1rem!important;
+    }
+}
+
+/*置顶文章区域样式*/
+
+.top-mes {
+    font-size: 1.5rem !important;
+    line-height: 2.5rem;
+    border-left: 2px solid #3472ef;
+    margin-bottom: 1rem !important;
+    padding-left: 1rem;
+}
+
+@media screen and (max-width: 970px){
+    .xs-top{
+        margin-top: 1rem;
+    }
+}
+
+
+/*文章样式*/
+ article {
+    background-color: #fff;
+}
+
+.top-article-title {
+    font-size: 2.2rem;
+    text-align: center;
+    line-height: 3rem;
+    color: #0088DB;
+}
+
+.top-article-blok{
+	
+}
+.top-article-info {
+    padding-left: 0.5rem;
+    
+    margin-bottom: 0px;
+    color: #999;
+    font-size: 1.2rem;
+
+}
+
+.top-article-content {
+	  
+    text-align: justify;
+
+    text-indent: 2rem;
+	overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;
+    padding-bottom:10px;
+    margin:1rem;
+}
+
+.top-article-content a{
+	font-family:微软雅黑;
+	line-height:1.5rem; 
+
+}
+
+.blank{
+	height:3px;
+	width:100%;
+}
+/*最新文章区域*/
+.new-article-row {
+
+}
+
+.new-mes {
+    font-size: 1.5rem !important;
+    line-height: 2.5rem;
+    border-left: 2px solid #3472ef;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+
+    padding-left: 1rem;
+}
+
+/*时间轴*/
+/*设置时间轴内文字垂直居中*/
+.time-block {
+    border-right: 2px #e5e5e5 solid;
+    display: -webkit-flex;
+    align-items: center;
+   color: #2D64B3;
+}
+
+/*设置时间轴的月日的样式*/
+.month {
+    margin-bottom: 0rem !important;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+
+.year {
+    font-size: 1.8rem;
+}
+@media screen and  (max-width:1000px ){
+    .month{
+        font-size: 1.2rem;
+    }
+    .year{
+        font-size: 1.6rem;
+    }
+}
+/*最新文章样式*/
+.new-article-row{
+}
+.new-article-block {
+    padding-bottom: 1rem;
+    display: -webkit-flex;
+    flex-direction:row;
+}
+
+.new-article-content-block{
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+width: 100%;
+}
+.new-article-content-img{
+    margin: auto 0;
+}
+.new-article-title {
+    font-size: 1.7rem;
+    line-height: 2.0rem;
+    color: #0088DB;
+}
+
+/*设置最新文章的标题以及详细信息针对不同屏幕使用不同样式*/
+@media screen and (max-width: 768px) {
+    .new-article-title {
+        font-size: 1.7rem;
+        line-height: 2.0rem;
+        color: #0088DB;
+        text-align: center;
+    }
+}
+
+.new-article-info {
+    margin: 0.1rem 0;
+    color: #999;
+    font-size: 1.2rem;
+}
+
+.xs-time {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .new-article-info {
+        margin: 0.5rem 0;
+        color: #999;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .xs-time {
+        display: inline-block;
+    }
+}
+
+
+/*end main left*/
+

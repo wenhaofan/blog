@@ -1,0 +1,60 @@
+#define paginate(page)
+		#if(page.getTotalPage()!=0)
+			<div class="new-article-row row">
+				<nav aria-label="Page navigation" style="width: 200px; margin: 0 auto;">
+					<ul class="pagination">
+					#if(!page.isFirstPage())
+						<li>
+							<a href="javascript:goPage(#(page.getPageNumber()-1))" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+					#else
+						<li class="disabled">
+							<a href="javascript:void(0)" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+					#end
+						
+						#for(i=1,size=articlePage.getTotalPage();i<=size;i++)
+							#if(i==page.getPageNumber())
+								<li class="active" ><a href="javascript:void(0)">#(i)</a></li>
+							#else
+								<li ><a href="javascript:goPage(#(i))">#(i)</a></li>
+							#end
+							
+							#if(i==3)
+								#break
+							#end
+						#end
+						
+					#if(!page.isLastPage())
+						<li>
+							<a href="javascript:goPage(#(page.getPageNumber()+1))" aria-label="Next"> 
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					#else
+						<li class="disabled">
+							<a href="javascript:void(0)" aria-label="Next"> 
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					#end
+					
+					</ul>
+				</nav>
+			</div>
+		#end
+		
+<script type="text/javascript">
+	function goPage(num){
+		var $from=$("#searchForm");
+		var url=$from.attr("action");
+		url+="/"+num;
+		$from.attr("action",url);
+		$from.submit();
+	}
+</script>
+#end

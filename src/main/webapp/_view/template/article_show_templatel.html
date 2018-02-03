@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+#@meta()
+    <script src="/resource/js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="/resource/bootstrap/css/bootstrap.min.css" />
+<script src="/resource/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="/resource/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script src="/resource/front/js/article_show.js"></script>
+<link rel="stylesheet"
+	href="/resource/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" />
+<link rel="stylesheet" href="/resource/front/css/article_show.css" />
+<link rel="shortcut icon" href="/favicon.ico" 
+	type="image/x-icon">
+
+
+</head>
+<body class="container-fluid">
+	<!-- header -->
+		#@header()
+	<!--end header-->
+	
+	<!--page main-->
+
+	<div class="row">
+		<!--pc端占位空白-->
+		<div class="blank col-xs-0 col-md-1"></div>
+		<!--文章展示部分-->
+		<main class="main col-xs-12 col-sm-9 col-md-8">
+		<article>
+			<h3 class="article-title">
+				<a href="" title="查看${article.get('uk_title')}全文">${article.get('uk_title')}</a>
+			</h3>
+			<p class="article-info">
+					分类:<#if categorys?? && categorys?size gt 0>
+						  <#list categorys as category>
+						  	   <a href="/article/category/${category.get('uk_url')}" title="查看所有${category.get('uk_name')}开发中的文章">${category.get('uk_name')}</a>
+						  		
+						  		<#if category_has_next>
+						  			、
+						  		</#if>
+						  </#list>
+					</#if>
+				 &nbsp;&nbsp;&nbsp; 
+				
+				 发表时间:${article.get('create_time')?string("yyyy-MM-dd HH:mm:ss")}  &nbsp;&nbsp;&nbsp; 
+				<span class="glyphicon glyphicon-eye-open"></span> 
+					#(article.get('read_num'))
+					
+				&nbsp;&nbsp;&nbsp;
+				
+				
+				
+				<#if article.get('is_original') == 1  >
+					原创
+				<#else>
+					转载
+				</#if>
+			
+			</p>
+			<div id="article-content">
+				${article.get('content')}
+			</div>
+			<nav class="link_nav">
+				<p class="last">
+					上一篇：<a href="/article/#(lnArticle.get(0).get('pk_id'))">#(lnArticle.get(0).get('uk_title'))</a>
+				</p>
+				<p class="next">
+					下一篇：<a href="/article/#(lnArticle.get(1).get('pk_id'))">#(lnArticle.get(1).get('uk_title'))</a>
+				</p>
+			</nav>
+		</article>
+		<div class="" style="margin: 2rem 0;">
+			<!--PC和WAP自适应版-->
+			<div id="SOHUCS" sid="testArticle"></div>
+			<script type="text/javascript">
+				(function() {
+					var appid = 'cytcLUopr';
+					var conf = 'prod_8acf9ebcdc92f7f9572daef2e77a8114';
+					var width = window.innerWidth
+							|| document.documentElement.clientWidth;
+					if (width < 960) {
+						window.document
+								.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='
+										+ appid
+										+ '&conf='
+										+ conf
+										+ '"><\/script>');
+					} else {
+						var loadJs = function(d, a) {
+							var c = document.getElementsByTagName("head")[0]
+									|| document.head
+									|| document.documentElement;
+							var b = document.createElement("script");
+							b.setAttribute("type", "text/javascript");
+							b.setAttribute("charset", "UTF-8");
+							b.setAttribute("src", d);
+							if (typeof a === "function") {
+								if (window.attachEvent) {
+									b.onreadystatechange = function() {
+										var e = b.readyState;
+										if (e === "loaded" || e === "complete") {
+											b.onreadystatechange = null;
+											a()
+										}
+									}
+								} else {
+									b.onload = a
+								}
+							}
+							c.appendChild(b)
+						};
+						loadJs("https://changyan.sohu.com/upload/changyan.js",
+								function() {
+									window.changyan.api.config({
+										appid : appid,
+										conf : conf
+									})
+								});
+					}
+				})();
+			</script>
+
+
+		</div>
+		</main>
+		
+	<div class="col-md-3"></div>
+		<div class="content-right col-xs-12 col-sm-3 col-md-3">
+
+			#@aside()
+		</div>
+	</div>
+
+
+	<!--end page main-->
+
+	<!-- footer-->
+	#@bottom()
+	<!--end footer-->
+</body>
+
+</html>

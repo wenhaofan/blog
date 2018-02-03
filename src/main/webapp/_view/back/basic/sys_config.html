@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>添加</title>
+#@jquery()
+#@bootstrap()
+#@validate()
+</head>
+<style>
+body {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+form>.row{
+	margin-top:1.5rem;
+}
+</style>
+<body>
+	<div>
+		<ul class="breadcrumb" style="margin: 0px;">
+			<li>系统管理</li>
+			<li>首页信息配置</li>
+		</ul>
+	</div>
+	<hr/>
+	<main class="container-fluid">
+	<form action="/admin/basic/update" method="post"
+		class="form-horizontal">
+		<div class="row alert alert-info" style="margin: 0px; padding: 5px;">基本信息
+			<button type="button" class ="btn btn-danger" id="generateAll"><a href="/admin/basic/generate">一键生成</a></button>
+			</div>
+		#@mes(basicMes,'更新成功!')
+		<!-- 开始1 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">博客title:</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="title"
+							placeholder="博客title" value="#(basic.title)" />
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="pkId" value="#(basic.pkId)" />
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">网站作者:</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="author"
+							placeholder="请输入网站作者名称" value="#(basic.author)" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束1 -->
+		<!-- 开始2 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">关键词:</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="keywords"
+							placeholder="请输入关键词" value="#(basic.keywords)" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">网站描述:</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="description"
+							placeholder="请输入网站描述" value="#(basic.description)" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">站长邮箱:</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="email"
+							placeholder="请输入站长邮箱" value="#(basic.email)" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--结束2 -->
+
+		<!--结束3 -->
+		<!-- 开始4 -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">版权以及备案号(网站底部)</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="bottomDescription"
+							placeholder="请输入版权以及备案号(网站底部)"
+							value="#(basic.bottomDescription)" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">图片存储选项:</label>
+					<div class="col-xs-9 ">
+
+						<div class="radio">
+							<label name="show"> <input type="radio" name="isSaveQiniu"
+								id="optionsRadios1" value="2" #if(basic.isSaveQiniu)==2)checked #end />
+								同时存储在七牛云以及服务器
+							</label>
+						</div>
+						<div class="radio">
+							<label name="show"> <input type="radio" name="isSaveQiniu"
+								id="optionsRadios2" value="1" #if(basic.isSaveQiniu==1)checked #end /> 仅存储在七牛云
+							</label>
+						</div>
+						<div class="radio">
+							<label id="local"> <input type="radio" name="isSaveQiniu"
+								id="optionsRadios2" value="0" #if(basic.isSaveQiniu==0)checked #end /> 仅存储在服务器
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+			<script>
+					$(function(){
+			
+						$("#local").click(function(){
+							
+							$("#qiniuSet").hide(100);
+						});
+						
+						$("label[name='show']").click(function(){
+						
+							$("#qiniuSet").show(100);
+						});
+							
+					});
+				</script>
+				<div id="qiniuSet">
+		<div class="row" >
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">七牛云AK:</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="qiniuAk"
+							placeholder="七牛云AK" value="#(basic.qiniuAk)" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">七牛云SK:</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="qiniuSk"
+							placeholder="七牛云SK" value="#(basic.qiniuSk)" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group ">
+					<label class="col-xs-2 control-label">七牛云bucket:</label>
+					<div class="col-xs-9 ">
+						<input type="text" class="form-control" name="qiniuBucket"
+							placeholder="七牛云bucket" value="#(basic.qiniuBucket)" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 col-xs-offset-4">
+				<input type="submit" class="btn btn-success" value="保存信息" /> <input
+					type="reset" class="btn btn-danger" value="重置信息" />
+			</div>
+
+		</div>
+</div>
+	</form>
+	</main>
+</body>
+</html>

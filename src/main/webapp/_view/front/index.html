@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+<link rel="stylesheet" href="/assets/front/css/master.css" />
+<meta name="keywords" content="#(seoKeywords)" />
+<meta name="description" content="#(seoDescr)" />
+<meta name="Author" content="范文皓">
+<title>#(seoTitle)</title>
+#@jquery()
+#@bootstrap()
+<script type="text/javascript">
+        
+        $(function () {
+//            初始化时间轴高度
+            function timeShaft() {
+                var articleHeight = $(".time").parent().next().height();
+
+                $(".time-block").css("height", articleHeight);
+            }
+
+            timeShaft();
+            $(window).resize(timeShaft);
+
+      
+            
+        	var tempArticleContentSmall=new Array();
+            var tempArticleContentBig=new Array();
+            var contentObj=$('.newArticle');
+        
+
+        });
+
+    </script>
+
+</head>
+
+
+<body class="container-fluid">
+<script>
+	document.write("");
+</script>
+	#@header()
+	<!--end header-->
+
+	<div class="row">
+		<!--pc端占位空白-->
+		<div class="blank col-xs-0 col-md-1"></div>
+		<!--文章展示部分-->
+		<main class="col-xs-12 col-sm-9 col-md-8"> <!--置顶文章区域块-->
+		<div class="row">
+			<h2 class="top-mes row">置顶文章</h2>
+		</div>
+		
+		#if(topArticles==null||topArticles.size()==0)
+			<div class="new-article-row row" style="height:200px;width:200px;margin:0 auto;">
+				<h4>该分类暂无置顶文章</h4>
+			</div>
+		#else
+		
+		<div class="top-article-row row">
+			#for(article:topArticles)
+			<div class="xs-top top-article-blok col-xs-12 col-md-6" style="">
+				<article class="" >
+					<h3 class="top-article-title">
+						<a href="/article/#(article.pkId)" title="查看#(article.ukTitle)全文">#(article.ukTitle)</a>
+					</h3>
+					<p class="top-article-info">
+						<span class="glyphicon glyphicon-arrow-right"></span> 
+						
+						分类: #for(item:article.categorys)
+								 <a href="/index?c=#(item.categoryId)" title="查看#(item.ukName)开发中的文章">#(item.ukName)</a>
+								#if(for.last!=true)
+									 、 
+								#end 
+							#end &nbsp;&nbsp;&nbsp;&nbsp;
+						发表时间:#date(article.gmtCreate,'yyyy-MM-dd')&nbsp;&nbsp;&nbsp;&nbsp; 
+							<span class="glyphicon glyphicon-eye-open"></span> 
+					#(article.readNum)
+					</p>
+					<div class="top-article-content"   name="content_a">
+						<a href="/article/#(article.pkId)"  title="查看#(article.ukName)" >
+							#(article.content) </a>
+						
+					</div>
+					<div class="blank"></div>
+				</article>
+			</div>
+			#end
+
+		</div>
+		#end
+		<!--最新文章区域块-->
+		<div class="row">
+			<h2 class="new-mes col-md-12">最新文章</h2>
+		</div>
+			
+			
+		#if(articlePage==null||articlePage.getTotalPage()==0)
+			<div class="new-article-row row" style="height:200px;width:200px;margin:0 auto;">
+				<h4 >该分类暂无最新文章</h4>
+			</div>
+		#else
+	
+			#for(article:articlePage.getList()) <!--最新文章区域块-->
+			<div class="new-article-row row">
+	
+				<!--时间轴-->
+				<div class="time-block hidden-xs col-sm-1  col-md-1">
+					<div class="time">
+						<p class="month">#date(article.gmtCreate,"dd-MM")</p>
+						<p class="year">#date(article.gmtCreate,"yyyy")</p>
+					</div>
+				</div>
+				<!--最新文章显示部分-->
+				<div class="new-article-block col-xs-12 col-sm-11 col-md-11">
+					<a href="/article/#(article.pkId)"
+						class="new-article-content-img hidden-xs">
+						#if(article.imageUrl!=null)
+							<img src="#(article.imageUrl)" width="135px;" height="115px;" />
+						#end
+						</a>
+					<div class="new-article-content-block" >
+						<article style="height:107px;overflow: hidden; text-overflow: ellipsis;">
+							<h3 class="new-article-title">
+								<a href="/article/#(article.pkId)"
+									title="查看#(article.ukTitle)全文">#(article.ukTitle)</a>
+							</h3>
+	
+							<p class="new-article-info">
+								分类: #for(item:article.categorys??) 
+										<a href="/index?c=#(item.categoryId)" title="查看#(item.ukName)开发中的文章">#(item.ukName)</a>
+											#if(for.last!=true) 
+												、
+											#end 
+									#end &nbsp;&nbsp;&nbsp; 
+									<span class="xs-time"> 发表时间:#date(article.gmtCreate,"yyyy-MM-dd HH:mm:ss") &nbsp;&nbsp;&nbsp; 
+									</span><span class="glyphicon glyphicon-eye-open"></span> 
+									#(article.readNum)
+							</p>
+							<div class="new-article-content">
+									<a href="/article/#(article.pkId)" title="查看#(article.ukTitle)全文" class="newArticle">
+									#(article.content) </a>
+							</div>
+						</article>
+					</div>
+	
+				</div>
+	
+			</div>
+
+			#end
+		#end
+
+		#if(articlePage!=null&&articlePage.getTotalPage()!=0)
+			<div class="new-article-row row">
+				<nav aria-label="Page navigation"
+					style="width: 200px; margin: 0 auto;">
+					<ul class="pagination">
+						#if(!articlePage.isFirstPage())
+						<li>
+							<a href="/index?p=#(articlePage.getPageNumber()-1)" aria-label="Previous"> 
+							<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						#else
+						<li class="disabled">
+					
+							<span aria-hidden="true">&laquo;</span>
+						
+						</li>
+						#end
+						
+						
+						#for(i=1,size=articlePage.getTotalPage();i<=size;i++)
+							#if(i==articlePage.getPageNumber())
+								<li class="active"><a href="javascript:void(0)">#(i)</a></li>
+							#else
+								<li><a href="/index?p=#(i)">#(i)</a></li>
+							#end
+						
+							#if(i==3)
+								#break
+							#end
+						#end
+						
+						#if(!articlePage.isLastPage())
+							<li>
+							<a href="/index?p=#(articlePage.getPageNumber()+1)" aria-label="Next"> 
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+							</li>
+						#else
+							<li class="disabled">
+								<span aria-hidden="true" >&raquo;</span>
+							</li>
+						#end
+					
+					</ul>
+				</nav>
+			</div>
+		#end
+		</main>
+
+		<div class="content-right col-xs-12 col-sm-3 col-md-3">
+			#@aside()</div>
+
+	</div>
+
+
+	<!--end page main-->
+
+	#@bottom()
+
+</body>
+
+</html>

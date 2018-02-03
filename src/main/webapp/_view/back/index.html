@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	#@jquery()
+	#@bootstrap()
+    <link rel="stylesheet" href="/assets/back/css/back_master.css"/>
+    <script src="/assets/back/js/back_master.js"></script>
+    <title>博客后台管理</title>
+</head>
+<body >
+    <header>
+        <h4>个人博客管理系统</h4>
+    </header>
+
+            <div class="" id="left">
+                    <ul>
+                        <li id="mainframe"><span class="glyphicon glyphicon-home" ></span>&nbsp;&nbsp;仪&nbsp;&nbsp;表&nbsp;&nbsp;盘</li>
+                        <li class="li-hover"><a href="/admin/article/add" target="mainFrame">发&nbsp;&nbsp;表&nbsp;&nbsp;文&nbsp;&nbsp;章</a></li>
+                        <li class="li-hover"><a href="/admin/article/list" target="mainFrame"> 文&nbsp;&nbsp;章&nbsp;&nbsp;列&nbsp;&nbsp;表</a></li>
+                        <li class="li-hover"><a href="/admin/category/list" target="mainFrame">分&nbsp;&nbsp;类&nbsp;&nbsp;管&nbsp;&nbsp;理</a></li>
+                        <li class="li-hover"><a href="/admin/basic/" target="mainFrame">基&nbsp;&nbsp;本&nbsp;&nbsp;配&nbsp;&nbsp;置</a></li>
+                   	   	<li class="li-hover"><a href="/admin/bloger/" target="mainFrame">博&nbsp;&nbsp;主&nbsp;&nbsp;信&nbsp;&nbsp;息</a></li>
+                   		<li class="li-hover"><a href="/admin/blogroll" target="mainFrame">友&nbsp;&nbsp;链&nbsp;&nbsp;管&nbsp;&nbsp;理</a></li>
+                   		<li class="li-hover"><a href="/admin/diy/action/list" target="mainFrame">页&nbsp;&nbsp;面&nbsp;&nbsp;管&nbsp;&nbsp;理</a></li>
+                   		
+                   	
+                    </ul>
+            </div>
+            <main class="" id="right">
+                <iframe src="/admin/article/list" name="mainFrame" >
+
+
+                </iframe>
+            </main>
+
+    <footer></footer>
+</body>
+</html>

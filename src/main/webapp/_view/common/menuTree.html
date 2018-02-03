@@ -1,0 +1,27 @@
+#define menuTree(menus,tree,num)
+	
+	#if(num>0)
+		<ul>	
+			#set(num=--num)
+	       		#for(menu:menus)
+		       		#if(menu.isDirectory())
+		       			<li class="menu-directory" menuId="#(menu.currentId)"  draggable="true" >#(menu.name)</li>
+		       			#(num>0?'<li>':'')#@menuTree(tree.getChilds(menu),tree,num)#(num>0?'</li>':'')
+		       		#end 
+		       	#--
+		       		#if(menu.isFile())
+		       			<li class="file getContent" currentId="#(menu.currentId)" treeName="#(tree.treeName)" draggable="true" >#(menu.name)</li>
+		       		#end
+		       	--#
+	       		#end 
+		</ul>
+	#end
+	
+#end
+
+#define menuFile()
+#end
+
+#define menuDirectory(menu)
+
+#end
